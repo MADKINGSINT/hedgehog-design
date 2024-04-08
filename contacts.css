@@ -1,0 +1,397 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+:root {
+  --bg: #111316;
+  --logo: url(./img/logo.png);
+  --logopng: url(./img/logo.png);
+  --ticket: url(https://assets.codepen.io/13471/ticket-shape.svg);
+  --ar: 20/30;
+  --gutter: 8%;
+}
+
+#app {
+  perspective: 1200px;
+  --o: 0;
+  --p: 100%;
+  --h: 50%;
+  --r: 0;
+  transform: translate3d(0, 0, 0.1px);
+}
+
+.ticket {
+  --scale: 1;
+  transform: translate3d(0, 0, 0.1px) scale(var(--scale)) rotateY(var(--r));
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+.front,
+.back {
+  grid-area: 1/1;
+  background-color: #6e6176;
+  background-image: radial-gradient(circle at var(--p) 50%, #fff 10%, transparent 100%);
+  background-size: 100% 220vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  display: grid;
+  backface-visibility: visible;
+  transform: translateZ(1px);
+  transform-style: preserve-3d;
+  -webkit-mask-image: var(--ticket);
+          mask-image: var(--ticket);
+  -webkit-mask-size: cover;
+          mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+.cutout {
+  position: absolute;
+}
+
+.front::after,
+.back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(-70deg, transparent 40%, rgba(255, 255, 255, 0.5) 40.5%, transparent);
+  background-size: 200% 200%;
+  background-position: var(--p) var(--p);
+  z-index: 5;
+  opacity: calc(var(--o) + 0.5);
+  pointer-events: none;
+}
+
+.front {
+  transform: rotateY(180deg) translateZ(1px);
+}
+
+.holo {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 15px;
+}
+
+.holo {
+  --space: 5%;
+  --red: hsl(0, 100%, 50%);
+  --orange: hsl(30, 100%, 50%);
+  --yellow: hsl(60, 100%, 50%);
+  --green: hsl(120, 100%, 50%);
+  --cyan: hsl(180, 100%, 50%);
+  --blue: hsl(222, 100%, 50%);
+  --purple: hsl(258, 100%, 50%);
+  --magenta: hsl(300, 100%, 50%);
+  background-image: repeating-linear-gradient(-45deg, var(--red) 0%, var(--orange) calc(var(--space) * 1), var(--yellow) calc(var(--space) * 2), var(--green) calc(var(--space) * 3), var(--cyan) calc(var(--space) * 4), var(--blue) calc(var(--space) * 5), var(--purple) calc(var(--space) * 6), var(--magenta) calc(var(--space) * 7), var(--red) calc(var(--space) * 8));
+  background-size: 150vw 150vh;
+  background-position: calc(var(--h)) calc(var(--h));
+  background-repeat: no-repeat;
+  -webkit-mask-image: var(--logopng);
+          mask-image: var(--logopng);
+  -webkit-mask-size: 4% 4%;
+          mask-size: 4% 4%;
+  -webkit-mask-repeat: repeat;
+          mask-repeat: repeat;
+  mix-blend-mode: plus-lighter;
+  filter: brightness(0.9) contrast(0.7) saturate(2);
+  opacity: var(--o);
+}
+
+.logo,
+.data {
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  width: 100%;
+  place-self: center;
+  transform: translateY(-14%);
+}
+
+.back .logo {
+  position: absolute;
+  right: var(--gutter);
+  top: 13%;
+  width: 50%;
+  image-rendering: optimize-speed;
+  image-rendering: crisp-edges;
+}
+
+.data {
+  margin: 14% var(--gutter);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0.2em 0;
+}
+
+p {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0.2em 0 1em;
+}
+
+[contenteditable] {
+  outline: none;
+}
+
+[contenteditable]:focus {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.qr {
+  max-width: 30%;
+  display: block;
+  image-rendering: optimize-speed;
+  image-rendering: crisp-edges;
+}
+
+.divider {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  height: 18%;
+  padding: 0 var(--gutter);
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 0px, rgba(255, 255, 255, 0) 8px, rgba(0, 0, 0, 0.3333333333) 8px, rgba(0, 0, 0, 0.3333333333) 16px), radial-gradient(ellipse at center center, rgba(255, 255, 255, 0) 10%, transparent 50%);
+  background-size: 100% 1.5px, 250% 1.5px;
+  background-repeat: no-repeat;
+  background-position: -4px top, var(--h) top;
+  background-blend-mode: overlay;
+  font-size: 16px;
+  font-weight: 400;
+  z-index: 2;
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  font-family: heebo;
+  font-weight: 600;
+}
+
+.profile {
+  border-radius: 100%;
+  width: 40px;
+  box-shadow: 0 0 0 1.33px black;
+  margin-right: 10px;
+  image-rendering: optimize-speed;
+  image-rendering: crisp-edges;
+}
+
+.verified {
+  width: 18px;
+  margin-left: 5px;
+}
+
+.usernum {
+  font-size: 20px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1 {
+  font-family: "Roboto Mono", monospace;
+  top: 20px;
+  text-align: center;
+  z-index: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  color: black;
+  font-family: "Roboto Mono", monospace;
+  display: grid;
+  grid: 1fr/1fr;
+  place-content: center;
+  overflow: hidden;
+  padding: 50px;
+  z-index: 999;
+}
+
+.ticket {
+  display: grid;
+  grid-area: 1/1;
+  width: 400px;
+  aspect-ratio: var(--ar);
+}
+
+@media screen and (max-width: 400px) {
+  .ticket {
+    --scale: 0.75;
+  }
+}
+.backk {
+  width: 450px;
+  margin-left: 10px;
+  display: flex;
+  left: 0px;
+  gap: 5px;
+}
+.backk_container {
+  display: flex;
+  gap: 30px;
+}
+.backk__strelka {
+  width: 50px;
+  height: 50px;
+  margin-left: 30px;
+}
+.backk_strelka path {
+  stroke: black;
+}
+.backk__text {
+  color: black;
+  width: 300px;
+  height: 50px;
+  font-family: "Inter", "DM Sans", Arial, sans-serif;
+  padding-top: 8px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  top: 1200px;
+  align-items: center;
+  height: 100px;
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  background-color: #220033;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(315deg, #000, rgb(42, 42, 51));
+}
+.footer__copyright {
+  color: white;
+}
+
+.wrapper {
+  display: inline-flex;
+  list-style: none;
+}
+
+.wrapper .icon {
+  position: relative;
+  background: #483e3e;
+  border-radius: 50%;
+  padding: 15px;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+  background: #1877F2;
+  color: #ffffff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #00ff4c;
+  color: #ffffff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #E4405F;
+  color: #ffffff;
+}
+
+.wrapper .github:hover,
+.wrapper .github:hover .tooltip,
+.wrapper .github:hover .tooltip::before {
+  background: #333333;
+  color: #ffffff;
+}
+
+.wrapper .youtube:hover,
+.wrapper .youtube:hover .tooltip,
+.wrapper .youtube:hover .tooltip::before {
+  background: #CD201F;
+  color: #ffffff;
+}/*# sourceMappingURL=contacts.css.map */
