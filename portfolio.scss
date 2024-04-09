@@ -335,7 +335,7 @@ $images: url("./img/1.png"), url("./img/2.png"), url("./img/3.png"),
 }
 body {
   height: 100%;
-
+  overflow-x: hidden;
   background: black;
 }
 
